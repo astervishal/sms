@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'name'=>'Asterisks Softwares',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
@@ -14,10 +15,16 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
+       /* 'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-        ],
+        ],*/
+        'user' => [
+		'identityClass' => 'app\models\Admin',
+		'enableAutoLogin' => true,//If you don't have authKey column in your DB, set enableAutoLogin field to false
+		'enableSession' => true,
+	],
+ 
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -38,14 +45,18 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
+      
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+        
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];

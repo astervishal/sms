@@ -19,7 +19,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout','about'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
@@ -76,6 +76,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            //echo Yii::$app->user->identity->username;exit();
             return $this->goBack();
         }
         return $this->render('login', [
